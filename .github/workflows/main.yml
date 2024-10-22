@@ -24,4 +24,4 @@ jobs:
         aws-region: ap-south-1
 
     -  name: Syncing files from repo to bucket and deployment
-       run: aws s3 sync s3://tada01 --delete
+       run: aws s3 sync . s3://tada01 --delete
