@@ -1,1 +1,1 @@
-# git-actions-s3-hosting
+# Hosting a static website on s3 using github actions
