@@ -11,9 +11,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    environment: dev
-
-    steps: 
+    steps:
+    -  name: Approval
+       uses: macnev2013/manual-approval@latest
+       with:
+        approvers: maulik-wmp
+        minimum-approvals: 1
+        issue-title: 'Manual Approval'
+        issue-body: |
+          "Issue Body"
+          
     -  name: Checkout
        uses: actions/checkout@v4
     
