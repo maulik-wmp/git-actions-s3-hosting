@@ -2,13 +2,13 @@ name: Upload and Host on S3
 
 on: 
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
 
 
 jobs:
-  build:
+  build-main:
 
     runs-on: ubuntu-latest
 
@@ -25,3 +25,15 @@ jobs:
 
     -  name: Syncing files from repo to bucket and deployment
        run: aws s3 sync . s3://tada01 --delete
+    
+    if: ${{ github.ref == 'refs/heads/main'}}
+  
+
+  build-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test
+        run: echo "New Branch"
+    
+    if: ${{ github.ref == 'refs/heads/dev'}}
