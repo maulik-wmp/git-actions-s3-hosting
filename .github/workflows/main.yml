@@ -23,7 +23,7 @@ jobs:
         aws-region: ap-south-1
 
     -  name: Syncing files from repo to bucket and deployment
-       run: aws s3 sync . s3://tada01 --delete
+       run: aws s3 sync . s3://actions-express-main --delete
     
     if: ${{ github.ref == 'refs/heads/main'}}
   
@@ -32,7 +32,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test
-        run: echo "New Branch"
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    -  name: AWS Configure
+       uses: aws-actions/configure-aws-credentials@v4
+       with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+
+    -  name: Syncing files from repo to bucket and deployment
+       run: aws s3 sync . s3://actions-express-dev --delete
     
     if: ${{ github.ref == 'refs/heads/dev'}}
