@@ -15,6 +15,7 @@ jobs:
     -  name: Approval
        uses: macnev2013/manual-approval@v1.0.18
        with:
+        secret: ${{ github.TOKEN }}
         approvers: maulik-wmp
         minimum-approvals: 1
         issue-title: 'Manual Approval'
