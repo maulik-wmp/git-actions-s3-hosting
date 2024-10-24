@@ -1,10 +1,10 @@
 name: Upload and Host on S3
 
-on: 
-  push:
-    branches: [ "main", "dev" ]
-  pull_request:
-    branches: [ "main", "dev" ]
+on: workflow_dispatch
+  # push:
+  #   branches: [ "main", "dev" ]
+  # pull_request:
+  #   branches: [ "main", "dev" ]
     
 permissions:
   issues: write
