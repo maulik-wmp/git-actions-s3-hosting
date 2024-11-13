@@ -87,7 +87,7 @@ jobs:
           git config --global user.name "maulik-wmp"
 
       - name: Get version from package.json
-        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+        run: echo 'VERSION=$(node -p "require('./package.json').version")' >> $GITHUB_ENV
         
       - name: Create tag
         run: |
