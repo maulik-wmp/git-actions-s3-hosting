@@ -16,17 +16,17 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
-    - name: Approval
-      uses: trstringer/manual-approval@v1
-      with:
-        secret: ${{ secrets.GITHUB_TOKEN }}
-        approvers: maulik-wmp
-        minimum-approvals: 1
-        issue-title: "Deploying v1.3.5 to prod from staging"
-        issue-body: "Please approve or deny the deployment of version v1.3.5."
-        exclude-workflow-initiator-as-approver: false
-        additional-approved-words: ''
-        additional-denied-words: ''
+    # - name: Approval
+    #   uses: trstringer/manual-approval@v1
+    #   with:
+    #     secret: ${{ secrets.GITHUB_TOKEN }}
+    #     approvers: maulik-wmp
+    #     minimum-approvals: 1
+    #     issue-title: "Deploying v1.3.5 to prod from staging"
+    #     issue-body: "Please approve or deny the deployment of version v1.3.5."
+    #     exclude-workflow-initiator-as-approver: false
+    #     additional-approved-words: ''
+    #     additional-denied-words: ''
 
     - name: Checkout
       uses: actions/checkout@v4
@@ -77,6 +77,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Configure git identity
+        run: |
+          git config --global user.email "maulikpandey@wingmanpartners.com"
+          git config --global user.name "maulik-wmp"
 
       - name: Get version from package.json
         id: get_version
