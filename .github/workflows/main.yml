@@ -72,6 +72,8 @@ jobs:
       run: aws s3 sync . s3://actions-express-dev --delete
 
   create-tags:
+    name: Tags
+    needs: build-main
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
