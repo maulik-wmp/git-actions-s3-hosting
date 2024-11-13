@@ -1,6 +1,6 @@
 {
   "name": "modernize-next-main",
-  "version": "1.12.23",
+  "version": "1.12.23-test",
   "private": true,
   "pre-commit": {
     "silent": true,
