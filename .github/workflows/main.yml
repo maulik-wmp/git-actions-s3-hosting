@@ -87,10 +87,13 @@ jobs:
           git config --global user.email "maulikpandey@wingmanpartners.com"
           git config --global user.name "maulik-wmp"
   
-      - name: Get version from package.json
-        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV 
+      - name: Get version from package.json 
+        id: get_version 
+        run: | 
+          VERSION=$(node -p "require('./package.json').version") 
+          echo "::set-output name=VERSION::$VERSION" 
 
-      - name: Use the version 
-        run: echo "Version: $VERSION" 
-        env: 
-          VERSION: ${{ env.VERSION }}
+      - name: Create tag 
+        run: | 
+          git tag -a "v${{ steps.get_version.outputs.VERSION }}" -m "Release version ${{ steps.get_version.outputs.VERSION }}"
+          git push origin "v${{ steps.get_version.outputs.VERSION }}" 
