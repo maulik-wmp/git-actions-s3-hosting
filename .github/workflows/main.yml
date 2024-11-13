@@ -1,17 +1,18 @@
 name: Upload and Host on S3
 
-on: workflow_dispatch
-  # push:
-  #   branches: [ "main", "dev" ]
-  # pull_request:
-  #   branches: [ "main", "dev" ]
+# on: workflow_dispatch
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
     
 permissions:
   issues: write
     
 jobs:
   build-main:
-    runs-on: self-hosted
+    runs-on: ubuntu
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
@@ -41,7 +42,7 @@ jobs:
       run: aws s3 sync . s3://actions-express-main --delete
 
   build-dev:
-    runs-on: self-hosted
+    runs-on: ubuntu
     if: ${{ github.ref == 'refs/heads/dev' }}
 
     steps:
@@ -74,6 +75,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - run: echo "previous_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_ENV
       - name: Create Tag
         id: create_tag
