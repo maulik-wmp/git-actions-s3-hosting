@@ -86,13 +86,28 @@ jobs:
           git config --global user.email "maulikpandey@wingmanpartners.com"
           git config --global user.name "maulik-wmp"
 
-      - name: Get version from package.json
-        run: echo 'VERSION=$(node -p "require('./package.json').version")' >> $GITHUB_ENV
-        
-      - name: Create tag
-        env: 
-          VERSION: ${{ env.VERSION }}
-        run: |
-          echo "Version: $VERSION"
-          git tag -a v$VERSION -m "Version $VERSION"
-          git push origin v$VERSION
+create-tags:
+  name: Tags
+  needs: build-main
+  runs-on: ubuntu-latest
+  if: ${{ github.ref == 'refs/heads/main' }}
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Configure git identity
+      run: |
+        git config --global user.email "maulikpandey@wingmanpartners.com"
+        git config --global user.name "maulik-wmp"
+
+    - name: Get version from package.json
+      id: get_version
+      run: echo "VERSION=$(node -p 'require(\"./package.json\").version')" >> $GITHUB_ENV
+
+    - name: Create tag
+      run: |
+        echo "Version: $VERSION"
+        git tag -a v$VERSION -m "Version $VERSION"
+        git push origin v$VERSION
+      env:
+        VERSION: ${{ env.VERSION }}
