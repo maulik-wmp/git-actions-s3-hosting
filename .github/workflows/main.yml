@@ -91,7 +91,7 @@ jobs:
         id: get_version 
         run: | 
           VERSION=$(node -p "require('./package.json').version") 
-          # echo "::set-output name=VERSION::$VERSION" 
+          echo "::set-output name=VERSION::$VERSION" 
 
       - name: Create tag 
         run: | 
