@@ -87,7 +87,7 @@ jobs:
           git config --global user.name "maulik-wmp"
 
       - name: Get version from package.json
-        run: echo "node -p "require('./package.json').version" >> $VERSION
+        run: echo $(node -p "require('./package.json').version") >> $VERSION
         
       - name: Create tag
         run: |
