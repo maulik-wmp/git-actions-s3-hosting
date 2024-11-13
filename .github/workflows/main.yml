@@ -12,7 +12,7 @@ permissions:
     
 jobs:
   build-main:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
 
     steps:
@@ -42,7 +42,7 @@ jobs:
       run: aws s3 sync . s3://actions-express-main --delete
 
   build-dev:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/dev' }}
 
     steps:
