@@ -1,4 +1,4 @@
-name: Upload and Host on S3
+name: Upload and Host on S3-test
 
 on: workflow_dispatch
 # on:
